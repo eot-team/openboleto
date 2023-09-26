@@ -77,7 +77,7 @@ class Safra extends BoletoAbstract {
      * Define as carteiras disponíveis para este banco
      * @var array
      */
-    protected $carteiras = array('1');
+    protected $carteiras = array('01');
 
     /**
      * Dígito verificador da carteira/nosso número para impressão no boleto
@@ -114,7 +114,7 @@ class Safra extends BoletoAbstract {
      */
     protected function gerarNossoNumero() {
 
-        $numero = self::zeroFill($this->getSequencial(), 8);
+        $numero = self::zeroFill($this->getSequencial(), 9);
 
         return $numero;
     }
@@ -156,5 +156,4 @@ class Safra extends BoletoAbstract {
             'carteira' => $this->getCarteira(),
         );
     }
-
 }
