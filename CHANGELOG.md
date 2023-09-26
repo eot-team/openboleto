@@ -1,5 +1,5 @@
-1.0
+0.0.1
 ===================
 
-* Número Sequencial é obrigatório e Nosso Número é somente leitura.
-* A classe de cada banco implementa o método getNossoNumero().
+* Alteração na Moeda.
+* Update Safra.
