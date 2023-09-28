@@ -27,7 +27,7 @@
         <td valign="bottom" colspan="8" class="noborder nopadding">
             <div class="logocontainer">
                 <div class="logobanco">
-                    <img src="<?php echo $logo_banco; ?>" alt="logotipo do banco">
+                    <img style="margin-bottom: -4px" src="<?php echo $logo_banco; ?>" alt="logotipo do banco">
                 </div>
                 <div class="codbanco"><?php echo $codigo_banco_com_dv ?></div>
             </div>
@@ -91,7 +91,9 @@
     </tr>
     <tr>
         <?php if (!$esconde_uso_banco) : ?>
-            <td<?php if (!$mostra_cip) : ?> colspan="2"<?php endif ?>>
+            <td<?php if (!$mostra_cip) :
+                ?> colspan="2"<?php
+               endif ?>>
                 <div class="titulo">Uso do banco</div>
                 <div class="conteudo"><?php echo $uso_banco ?></div>
             </td>
@@ -105,7 +107,9 @@
             </td>
         <?php endif ?>
 
-        <td<?php if ($esconde_uso_banco) : ?> colspan="3"<?php endif; ?>>
+        <td<?php if ($esconde_uso_banco) :
+            ?> colspan="3"<?php
+           endif; ?>>
             <div class="titulo">Carteira</div>
             <div class="conteudo"><?php echo $carteira ?></div>
         </td>
@@ -168,7 +172,7 @@
     <tr>
         <td colspan="7" valign="top">
             <div class="titulo">Pagador</div>
-            <div class="conteudo float_left"><?php echo $sacado.' - '.$sacado_documento; ?><br />
+            <div class="conteudo float_left"><?php echo $sacado . ' - ' . $sacado_documento; ?><br />
             <?=$sacado_endereco1;?><br /><?=$sacado_endereco2;?></div>
         </td>
         <td class="noleftborder">
