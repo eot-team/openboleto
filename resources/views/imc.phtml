@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--
+ * OpenBoleto - Geração de boletos bancários em PHP
+ *
+ * LICENSE: The MIT License (MIT)
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this
+ * software and associated documentation files (the "Software"), to deal in the Software
+ * without restriction, including without limitation the rights to use, copy, modify,
+ * merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies
+ * or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title><?php echo $cedente; ?></title>
+    <style type="text/css">
+        /* Embed the CSS content here */
+        <?php include $resource_path . '/css/styles.css' ?>
+    </style>
+</head>
+<body>
+    <div style="width: 666px">
+        <?php if ($imprime_instrucoes_impressao) :?>
+        <div class="noprint info">
+            <h4 style="text-align: center;">Instruções de Impressão</h4>
+            <ul>
+                <li>Configure a impressora tipo jato de tinta (deskjet) ou laser em qualidade normal ou alta (não use modo econômico)</li>
+                <li>Imprimir em folha A4 (210 x 297 mm) ou Carta (216 x 279 mm), branca.</li>
+                <li>Corte na linha indicada. Não rasure, risque, fure ou dobre a região onde se encontra o código de barras.</li>
+            </ul>
+        </div>
+        <?php endif ?>
+        <br>
+        <div class="linha-pontilhada">Recibo do Pagador</div>
+        <br>
+        <table class="table-boleto" cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+            <tr>
+                <td valign="bottom" colspan="6" class="noborder nopadding">
+                    <div class="logocontainer">
+                        <div class="logobanco">
+                            <img style="margin-bottom: -4px" src="<?php echo $logo_banco; ?>" alt="logotipo do banco">
+                        </div>
+                        <div class="codbanco"><?php echo $codigo_banco_com_dv ?></div>
+                    </div>
+                    <div class="linha-digitavel"><?php echo $linha_digitavel ?></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="5" width="250">
+                    <div class="titulo">Local de Pagamento</div>
+                    <div class="conteudo">Até o vencimento pagável em qualquer banco</div>
+                </td>
+                <td width="110">
+                    <div class="titulo">Vencimento</div>
+                    <div class="conteudo rtl"><?php echo $data_vencimento ?></div>
+                </td>
+            </tr>
+
+             <tr>
+                <td colspan="4" width="250">
+                    <div class="titulo">Beneficiário</div>
+                    <div class="conteudo"><?php echo $cedente ?></div>
+                </td>
+                <td width="120">
+                    <div class="titulo">Agência/Cód. Beneficiário</div>
+                    <div class="conteudo rtl"><?php echo $agencia_codigo_cedente ?></div>
+                </td>
+                <td width="110">
+                    <div class="titulo">Nosso número</div>
+                    <div class="conteudo rtl"><?php echo $nosso_numero ?></div>
+                </td>
+            </tr>
+
+             <tr>
+                <td colspan="1" width="120">
+                    <div class="titulo">CPF/CNPJ</div>
+                    <div class="conteudo"><?php echo $cedente_cpf_cnpj ?></div>
+                </td>
+                <td colspan="1" width="120">
+                    <div class="titulo">Nº documento</div>
+                    <div class="conteudo rtl"><?php echo $numero_documento ?></div>
+                </td> 
+                <td>
+                    <div class="titulo">Espécie</div>
+                    <div class="conteudo"><?php echo $especie ?></div>
+                </td>
+                <td>
+                    <div class="titulo">Quantidade</div>
+                    <div class="conteudo rtl"><?php echo $quantidade ?></div>
+                </td>   
+                <td width="120">
+                    <div class="titulo">Data processamento</div>
+                    <div class="conteudo"><?php echo $data_processamento ?></div>
+                </td>
+                <td width="110">
+                    <div class="titulo">(=) Valor Documento</div>
+                    <div class="conteudo rtl"><?php echo $valor_documento ?></div>
+                </td>
+            </tr>
+
+             <tr>
+                <td colspan="1" width="120">
+                    <div class="titulo">(-) Descontos / Abatimentos</div>
+                    <div class="conteudo rtl"><?php echo $desconto_abatimento ?></div>
+                </td>
+                <td colspan="1" width="120">
+                    <div class="titulo">(-) Outras deduções</div>
+                    <div class="conteudo"><?php echo $outras_deducoes ?></div>
+                </td> 
+                <td colspan="2">
+                    <div class="titulo">(+) Mora / Multa</div>
+                    <div class="conteudo rtl"><?php echo $mora_multa ?></div>
+                </td>
+                <td>
+                    <div class="titulo">(+) Outros acréscimos</div>
+                    <div class="conteudo rtl"><?php echo $outros_acrescimos ?></div>
+                </td>
+                <td>
+                    <div class="titulo">(=) Valor cobrado</div>
+                    <div class="conteudo rtl"><?php echo $valor_cobrado ?></div>
+                </td>
+
+            </tr>
+            <tr>
+                <td colspan="5" valign="top">
+                    <div style="margin-bottom:4px" class="titulo">Pagador</div>
+                    <div class="conteudo float_left"><?php echo $sacado ?> - <?php echo $sacado_documento; ?><br />
+                    <?=$sacado_endereco1;?><br /><?=$sacado_endereco2;?></div>
+                </td>
+                <td class="noleftborder">
+                    <div class="titulo" style="margin-top: 50px"></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="7" class="norightborder noleftborder">
+                    <div class="titulo rtl">Autenticação mecânica</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <div class="linha-pontilhada">Corte na linha pontilhada</div>
+        <br>
+
+        <!-- Ficha de compensação -->
+        <?php include('partials/ficha-de-compensacao-imc.phtml') ?>
+        <div class="linha-pontilhada" style="margin-bottom: 20px;">Corte na linha pontilhada</div>
+    </div>
+</body>
+</html>
