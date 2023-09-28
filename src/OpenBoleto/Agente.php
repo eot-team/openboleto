@@ -61,12 +61,12 @@ class Agente
     /**
      * @var string
      */
-    protected $uf;
+    protected $cidade;
 
     /**
      * @var string
      */
-    protected $cidade;
+    protected $uf;
 
     /**
      * Construtor
@@ -105,7 +105,7 @@ class Agente
      */
     public function getCep()
     {
-        return $this->cep;
+        return "CEP:" . $this->cep;
     }
 
     /**
@@ -233,7 +233,7 @@ class Agente
 
         if (preg_match('/^(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))$/', $documento)) {
             return 'CPF';
-        } else if (preg_match('/^(([0-9]{2}.[0-9]{3}.[0-9]{3}\/[0-9]{4}-[0-9]{2})|([0-9]{14}))$/', $documento)) {
+        } elseif (preg_match('/^(([0-9]{2}.[0-9]{3}.[0-9]{3}\/[0-9]{4}-[0-9]{2})|([0-9]{14}))$/', $documento)) {
             return 'CNPJ';
         }
 
